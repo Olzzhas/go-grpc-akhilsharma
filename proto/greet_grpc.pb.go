@@ -121,7 +121,7 @@ func (c *greetServiceClient) SayHelloBidirectionalStreaming(ctx context.Context,
 }
 
 type GreetService_SayHelloBidirectionalStreamingClient interface {
-	Send(*HelloResponse) error
+	Send(*HelloRequest) error
 	Recv() (*HelloResponse, error)
 	grpc.ClientStream
 }
@@ -130,7 +130,7 @@ type greetServiceSayHelloBidirectionalStreamingClient struct {
 	grpc.ClientStream
 }
 
-func (x *greetServiceSayHelloBidirectionalStreamingClient) Send(m *HelloResponse) error {
+func (x *greetServiceSayHelloBidirectionalStreamingClient) Send(m *HelloRequest) error {
 	return x.ClientStream.SendMsg(m)
 }
 
@@ -253,7 +253,7 @@ func _GreetService_SayHelloBidirectionalStreaming_Handler(srv interface{}, strea
 
 type GreetService_SayHelloBidirectionalStreamingServer interface {
 	Send(*HelloResponse) error
-	Recv() (*HelloResponse, error)
+	Recv() (*HelloRequest, error)
 	grpc.ServerStream
 }
 
@@ -265,8 +265,8 @@ func (x *greetServiceSayHelloBidirectionalStreamingServer) Send(m *HelloResponse
 	return x.ServerStream.SendMsg(m)
 }
 
-func (x *greetServiceSayHelloBidirectionalStreamingServer) Recv() (*HelloResponse, error) {
-	m := new(HelloResponse)
+func (x *greetServiceSayHelloBidirectionalStreamingServer) Recv() (*HelloRequest, error) {
+	m := new(HelloRequest)
 	if err := x.ServerStream.RecvMsg(m); err != nil {
 		return nil, err
 	}
